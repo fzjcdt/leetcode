@@ -2,7 +2,7 @@
 
 | #    | **Title**                     | Tags   |
 | :--- | ------------------------------------------------------------ | ------ |
-| 1    | <a href="#1">Two Sum</a>      | 双指针 |
+| 1    | [Two Sum](1-20.md)    | 双指针 |
 | 2    | <a href="#2">Add Two Numbers</a>      | 模拟，链表 |
 | 3    | <a href="#3">Longest Substring Without Repeating Characters</a>      | 模拟，字符串 |
 | 4    | <a href="#4">Median of Two Sorted Arrays</a>      | 二分 |
