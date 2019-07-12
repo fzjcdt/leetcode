@@ -12,7 +12,26 @@
 | 8    | <a href="#8">String to Integer (atoi)</a>      | 字符串 |
 | 9    | <a href="#9">Palindrome Number </a>      | 模拟 |
 | 10    | <a href="#10">Regular Expression Matching</a>      | 搜索，动态规划 |
-
+| 11    | <a href="#11">Container With Most Water</a>      | 双指针，贪心 |
+| 12    | <a href="#12">Integer to Roman</a>      | 模拟 |
+| 13    | <a href="#13">Roman to Integer </a>      | 模拟 |
+| 14    | <a href="#14">Longest Common Prefix    	</a>      | 模拟，字符串 |
+| 15    | <a href="#15">3Sum    	</a>      | 模拟 |
+| 16    | <a href="#16">3Sum Closest    	</a>      | 双指针 |
+| 17    | <a href="#17">Letter Combinations of a Phone Number    	</a>      | 搜索 |
+| 18    | <a href="#18">4Sum    	</a>      | 双指针，搜索 |
+| 19    | <a href="#19">Remove Nth Node From End of List    	</a>      | 双指针 |
+| 20    | <a href="#20">Valid Parentheses    	</a>      | 栈 |
+| 21    | <a href="#21">Merge Two Sorted Lists    	</a>      | 链表 |
+| 22    | <a href="#22">Generate Parentheses    	</a>      | 搜索 |
+| 23    | <a href="#23">Merge k Sorted Lists    	</a>      | 链表，堆 |
+| 24    | <a href="#24">Swap Nodes in Pairs    	</a>      | 链表，递归 |
+| 25    | <a href="#25">Reverse Nodes in k-Group    	</a>      | 链表 |
+| 26    | <a href="#26">Remove Duplicates from Sorted Array    	</a>      | 双指针 |
+| 27    | <a href="#27">Remove Element    	</a>      | 双指针 |
+| 28    | <a href="#28">Implement strStr()    	</a>      | KMP |
+| 29    | <a href="#29">Divide Two Integers    	</a>      | 递归 |
+| 30    | <a href="#30">Substring with Concatenation of All Words    	</a>      | 字符串 |
 
 
 
@@ -814,7 +833,6 @@ isMatch("aab", "c*a*b") → true
 
 搜索，时间复杂度O(2^n)
 ```
-
 public class P10 {
     public boolean dfs(String s, int sPos, int sLen, String p, int pPos, int pLen) {
         if (pPos >= pLen) {
@@ -901,8 +919,27 @@ public class P10_new {
         System.out.println(p.isMatch("aa", "a*"));
     }
 }
-
-
 ```
+
+## <a name="11">11.Container With Most Water</a>
+## <a name="12">12.Integer to Roman</a>
+## <a name="13">13.Roman to Integer</a>
+## <a name="14">14.Longest Common Prefix</a>
+## <a name="15">15.3Sum</a>
+## <a name="16">16.3Sum Closest</a>
+## <a name="17">17.Letter Combinations of a Phone Number</a>
+## <a name="18">18.4Sum</a>
+## <a name="19">19.Remove Nth Node From End of List</a>
+## <a name="20">20.Valid Parentheses</a>
+## <a name="21">21.Merge Two Sorted Lists</a>
+## <a name="22">22.Generate Parentheses</a>
+## <a name="23">23.Merge k Sorted Lists</a>
+## <a name="24">24.Swap Nodes in Pairs</a>
+## <a name="25">25.Reverse Nodes in k-Group</a>
+## <a name="26">26.Remove Duplicates from Sorted Array</a>
+## <a name="27">27.Remove Element </a>
+## <a name="28">28.Implement strStr()</a>
+## <a name="29">29.Divide Two Integers</a>
+## <a name="30">30.Substring with Concatenation of All Words </a>
 
 
