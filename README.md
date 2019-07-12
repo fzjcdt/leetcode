@@ -4,6 +4,15 @@
 | :--- | ------------------------------------------------------------ | ------ |
 | 1    | <a href="#1">Two Sum</a>      | 双指针 |
 | 2    | <a href="#2">Add Two Numbers</a>      | 模拟，链表 |
+| 3    | <a href="#3">Longest Substring Without Repeating Characters</a>      | 模拟，字符串 |
+| 4    | <a href="#4">Median of Two Sorted Arrays</a>      | 二分 |
+| 5    | <a href="#5">Longest Palindromic Substring</a>      | 动态规划 |
+| 6    | <a href="#6">ZigZag Conversion</a>      | 模拟，找规律 |
+| 7    | <a href="#7">Reverse Integer</a>      | 模拟 |
+| 8    | <a href="#8">String to Integer (atoi)</a>      | 字符串 |
+| 9    | <a href="#9">Palindrome Number </a>      | 模拟 |
+| 10    | <a href="#10">Regular Expression Matching</a>      | 搜索，动态规划 |
+
 
 
 
@@ -107,5 +116,7 @@ public class P_1_new {
     }
 }
 ```
+
+## <a name="2">Add Two Numbers</a>
 
 
