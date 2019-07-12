@@ -42,5 +42,25 @@
 | 38    | [Count and Say    	](21-40.md)  | 模拟，字符串 |
 | 39    | [Combination Sum    	](21-40.md)  | 动态规划，递归 |
 | 40    | [Combination Sum II    	](21-40.md)  | 递归 |
+| 41    | [First Missing Positive    	](41-60.md)  | 模拟 |
+| 42    | [Trapping Rain Water    	](41-60.md)  | 双指针，动态规划，栈 |
+| 43    | [Multiply Strings    	](41-60.md)  | 字符串 |
+| 44    | [Wildcard Matching    	](41-60.md)  | 动态规划，递归 |
+| 45    | [Jump Game II    	](41-60.md)  | 贪心 |
+| 46   | [Permutations    	](41-60.md)  | 递归 |
+| 47    | [Permutations II    	](41-60.md)  | 递归 |
+| 48    | [Rotate Image    	](41-60.md)  | 模拟 |
+| 49    | [Group Anagrams    	](41-60.md)  | 模拟 |
+| 50    | [Pow(x, n)    	](41-60.md)  | 快速幂 |
+| 51    | [N-Queens    	](41-60.md)  | 递归 |
+| 52    | [N-Queens II    	](41-60.md)  | 递归 |
+| 53    | [Maximum Subarray    	](41-60.md)  | 动态规划 |
+| 54    | [Spiral Matrix    	](41-60.md)  | 模拟 |
+| 55    | [Jump Game    	](41-60.md)  | 贪心 |
+| 56    | [Merge Intervals    	](41-60.md)  | 模拟 |
+| 57    | [Insert Interval    	](41-60.md)  | 模拟 |
+| 58    | [Length of Last Word    	](41-60.md)  | 模拟 |
+| 59    | [Spiral Matrix II    	](41-60.md)  | 模拟 |
+| 60    | [Permutation Sequence    	](41-60.md)  | 模拟 |
 
 
