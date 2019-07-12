@@ -22,27 +22,25 @@
 | 18    | [4Sum ](1-20.md)| 双指针，搜索 |
 | 19    | [Remove Nth Node From End of List](1-20.md) | 双指针 |
 | 20    | [Valid Parentheses](1-20.md) | 栈 |
-| 21    | <a href="#21">Merge Two Sorted Lists    	</a>      | 链表 |
-| 22    | <a href="#22">Generate Parentheses    	</a>      | 搜索 |
-| 23    | <a href="#23">Merge k Sorted Lists    	</a>      | 链表，堆 |
-| 24    | <a href="#24">Swap Nodes in Pairs    	</a>      | 链表，递归 |
-| 25    | <a href="#25">Reverse Nodes in k-Group    	</a>      | 链表 |
-| 26    | <a href="#26">Remove Duplicates from Sorted Array    	</a>      | 双指针 |
-| 27    | <a href="#27">Remove Element    	</a>      | 双指针 |
-| 28    | <a href="#28">Implement strStr()    	</a>      | KMP |
-| 29    | <a href="#29">Divide Two Integers    	</a>      | 递归 |
-| 30    | <a href="#30">Substring with Concatenation of All Words    	</a>      | 字符串 |
-
-
-## <a name="21">21.Merge Two Sorted Lists</a>
-## <a name="22">22.Generate Parentheses</a>
-## <a name="23">23.Merge k Sorted Lists</a>
-## <a name="24">24.Swap Nodes in Pairs</a>
-## <a name="25">25.Reverse Nodes in k-Group</a>
-## <a name="26">26.Remove Duplicates from Sorted Array</a>
-## <a name="27">27.Remove Element </a>
-## <a name="28">28.Implement strStr()</a>
-## <a name="29">29.Divide Two Integers</a>
-## <a name="30">30.Substring with Concatenation of All Words </a>
+| 21    | [Merge Two Sorted Lists ](21-40.md) | 链表 |
+| 22    | [Generate Parentheses](21-40.md)  | 搜索 |
+| 23    | [Merge k Sorted Lists](21-40.md) | 链表，堆 |
+| 24    | [Swap Nodes in Pairs ](21-40.md) | 链表，递归 |
+| 25    | [Reverse Nodes in k-Group ](21-40.md)  | 链表 |
+| 26    | [Remove Duplicates from Sorted Array ](21-40.md)   | 双指针 |
+| 27    | [Remove Element ](21-40.md) | 双指针 |
+| 28    | [Implement strStr() ](21-40.md)  | KMP |
+| 29    | [Divide Two Integers ](21-40.md)  | 递归 |
+| 30    | [Substring with Concatenation of All Words](21-40.md)  | 字符串 |
+| 31    | [Next Permutation    	](21-40.md)  | 找规律 |
+| 32    | [Longest Valid Parentheses    	](21-40.md)  | 双指针，动态规划，栈 |
+| 33    | [Search in Rotated Sorted Array    	](21-40.md)  | 二分 |
+| 34    | [Find First and Last Position of Element in Sorted Array    	](21-40.md)  | 二分 |
+| 35    | [Search Insert Position    	](21-40.md)  | 二分 |
+| 36    | [Valid Sudoku    	](21-40.md)  | 模拟 |
+| 37    | [Sudoku Solver    	](21-40.md)  | 递归 |
+| 38    | [Count and Say    	](21-40.md)  | 模拟，字符串 |
+| 39    | [Combination Sum    	](21-40.md)  | 动态规划，递归 |
+| 40    | [Combination Sum II    	](21-40.md)  | 递归 |
 
 
