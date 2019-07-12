@@ -337,7 +337,176 @@ public class P_3_new {
 
 
 ## <a name="4">4.Median of Two Sorted Arrays</a>
+
+There are two sorted arrays nums1 and nums2 of size m and n respectively.
+
+Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+
+Example 1:
+nums1 = [1, 3]
+nums2 = [2]
+The median is 2.0
+
+
+Example 2:
+nums1 = [1, 2]
+nums2 = [3, 4]
+The median is (2 + 3)/2 = 2.5
+
+```
+
+public class P4 {
+    //可以寻找两个数组中任意第k大的数
+    private int getMedian(int[] nums1, int nums1Left, int nums1Right,
+                          int[] nums2, int nums2Left, int nums2Right, int k) {
+
+        if (nums1Left > nums1Right) {
+            return nums2[nums2Left + k - 1];
+        } else if (nums2Left > nums2Right) {
+            return nums1[nums1Left + k - 1];
+        } else if (k == 1) {
+            return Math.min(nums1[nums1Left], nums2[nums2Left]);
+        }
+
+        int nums1Mid = (nums1Left + nums1Right) / 2;
+        int nums2Mid = (nums2Left + nums2Right) / 2;
+
+        if (nums1[nums1Mid] <= nums2[nums2Mid]) {
+            //把mid算成左边的元素
+            if ((nums1Mid - nums1Left + 1) + (nums2Mid - nums2Left + 1) > k) {
+                //左边已经大于k个了，则去掉更大的右边的。
+                //nums2Mid不可能是结果，因为大于k个，nums2Mid左边最大，一定是大于k，所以nums2Mid - 1
+                return getMedian(nums1, nums1Left, nums1Right, nums2, nums2Left, nums2Mid - 1, k);
+            } else {
+                //左边还不够或刚好k个，则去掉更小的左边的。
+                //nums1Mid不可能是结果，刚好是k个的时候，nums2Mid大于nums1Mid，答案不会是nums1Mid，所以nums1Mid + 1
+                return getMedian(nums1, nums1Mid + 1, nums1Right, nums2, nums2Left, nums2Right, k - (nums1Mid - nums1Left + 1));
+            }
+        } else {
+            if ((nums1Mid - nums1Left + 1) + (nums2Mid - nums2Left + 1) > k) {
+                return getMedian(nums1, nums1Left, nums1Mid - 1, nums2, nums2Left, nums2Right, k);
+            } else {
+                return getMedian(nums1, nums1Left, nums1Right, nums2, nums2Mid + 1, nums2Right, k - (nums2Mid - nums2Left + 1));
+            }
+        }
+    }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+
+        if ((m + n) % 2 == 0) {
+            return (getMedian(nums1, 0, m - 1, nums2, 0, n - 1, (m + n) / 2)
+                    + getMedian(nums1, 0, m - 1, nums2, 0, n - 1, (m + n) / 2 + 1)) / 2.0;
+        } else {
+            return getMedian(nums1, 0, m - 1, nums2, 0, n - 1, (m + n) / 2 + 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        P4 p = new P4();
+        int[] nums1 = {3, 4};
+        int[] nums2 = {1, 2};
+        System.out.println(p.findMedianSortedArrays(nums1, nums2));
+    }
+}
+```
+
+
 ## <a name="5">5.Longest Palindromic Substring</a>
+Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example:
+Input: "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+
+
+Example:
+Input: "cbbd"
+Output: "bb"
+
+```
+public class P5 {
+    public String longestPalindrome(String s) {
+        int left = 0, right = 0;
+        int len = s.length();
+        boolean[][] isPalindrome = new boolean[len][len];
+        /*
+         * 状态转移方程:
+         * f[i, j] = true  if i == j
+         * f[i, j] = s[i] == s[j]  if i + 1 == j
+         * f[i, j] = s[i] == s[j] && f[i + 1, j - 1]  otherwise
+         *
+         * 一开始写的是
+         * i = 0 to len
+         *   j = i to len
+         *     ...
+         * 然后比如0到4，要用1到3，但1到3还没有计算，所以改用下面的间隔，间隔0,1,2。。
+         * 实际只要改成P5_new那样
+         * i = 0 to len
+         *   j = 0 to i
+         * 就好
+         */
+
+        for (int interval = 0; interval < len; interval++) {
+            for (int i = 0; i < len - interval; i++) {
+                if (interval == 0) {
+                    isPalindrome[i][i] = true;
+                } else if (interval == 1) {
+                    isPalindrome[i][i + 1] = s.charAt(i) == s.charAt(i + 1);
+                } else {
+                    isPalindrome[i][i + interval] = s.charAt(i) == s.charAt(i + interval) && isPalindrome[i + 1][i + interval - 1];
+                }
+
+                if (isPalindrome[i][i + interval]) {
+                    left = i;
+                    right = i + interval;
+                }
+            }
+        }
+
+        return s.substring(left, right + 1);
+    }
+
+    public static void main(String[] args) {
+        P5 p = new P5();
+        System.out.println(p.longestPalindrome("babad"));
+    }
+}
+```
+
+```
+
+public class P5_new {
+    public String longestPalindrome(String s) {
+        int left = 0, right = 0, maxLen = -1;
+        int len = s.length();
+        boolean[][] isPalindrome = new boolean[len][len];
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j <= i; j++) {
+                isPalindrome[j][i] = s.charAt(j) == s.charAt(i) && (i - j < 2 || isPalindrome[j + 1][i - 1]);
+
+                if (isPalindrome[j][i] && i - j > maxLen) {
+                    left = j;
+                    right = i;
+                    maxLen = i - j;
+                }
+            }
+        }
+
+        return s.substring(left, right + 1);
+    }
+
+    public static void main(String[] args) {
+        P5_new p = new P5_new();
+        System.out.println(p.longestPalindrome("babad"));
+    }
+}
+```
+
+
 ## <a name="6">6.ZigZag Conversion</a>
 ## <a name="7">7.Reverse Integer</a>
 ## <a name="8">8.String to Integer (atoi)</a>
