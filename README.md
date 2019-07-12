@@ -27,13 +27,10 @@ return [0, 1].
 ```
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class P_1 {
+public class P1 {
     class Node {
         int num;
         int index;
@@ -45,26 +42,19 @@ public class P_1 {
     }
 
     public int[] twoSum(int[] nums, int target) {
-        List<Node> list = new ArrayList<Node>();
+        List<Node> list = new ArrayList<>();
         for (int i = 0, len = nums.length; i < len; i++) {
             list.add(new Node(nums[i], i));
         }
 
-        Collections.sort(list, new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                return o1.num - o2.num;
-            }
-        });
+        list.sort(Comparator.comparingInt(o -> o.num));
 
         int begin = 0, end = nums.length - 1;
         while (begin < end) {
             if (list.get(begin).num + list.get(end).num < target) {
                 begin++;
-                continue;
             } else if (list.get(begin).num + list.get(end).num > target) {
                 end--;
-                continue;
             } else {
                 break;
             }
@@ -78,17 +68,14 @@ public class P_1 {
 
     public static void main(String[] args) {
         int[] t = {3, 3};
-        P_1 s = new P_1();
+        P1 s = new P1();
         int[] r = s.twoSum(t, 6);
         System.out.println(r[0] + "  " + r[1]);
     }
 }
 ```
-
-
 一边读取进来, 一边加入哈希表, [3, 3]这种情况就能正确解决
-
-package exer;
+```
 
 import java.util.HashMap;
 import java.util.Map;
@@ -119,5 +106,6 @@ public class P_1_new {
         System.out.println(t[1]);
     }
 }
+```
 
 
