@@ -506,10 +506,403 @@ public class P5_new {
 }
 ```
 
-
 ## <a name="6">6.ZigZag Conversion</a>
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+
+
+Write the code that will take a string and make this conversion given a number of rows:
+
+string convert(string text, int nRows);
+convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
+
+```
+
+public class P6 {
+    /*
+     * zigzag pattern
+     * 例如: abcdefghijklmnop, numRows = 4
+     * a     g     m
+     * b   f h   l n
+     * c e   i k   o
+     * d     j     p
+     * 答案是agmbfglnceikodjp
+     *
+     * 规律是每次间隔2 * numRows - 2
+     * 如果不是第0行和第numRows - 1行，每次还要加上(numRows - i - 1) * 2的字符
+     */
+
+    public String convert(String s, int numRows) {
+        if (numRows == 1) {
+            return s;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int len = s.length();
+        int interval = 2 * numRows - 2;
+        int smallInterval = 0;
+
+        for (int i = 0; i < numRows; i++) {
+            for (int pos = i; pos < len; pos += interval) {
+                sb.append(s.charAt(pos));
+                if (i != 0 && i != numRows - 1) {
+                    smallInterval = (numRows - i - 1) * 2;
+                    if (pos + smallInterval < len) {
+                        sb.append(s.charAt(pos + smallInterval));
+                    }
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        P6 p = new P6();
+        System.out.println(p.convert("abcdefghi", 3));
+    }
+}
+```
+
 ## <a name="7">7.Reverse Integer</a>
+Given a 32-bit signed integer, reverse digits of an integer.
+
+Example 1:
+
+Input: 123
+Output:  321
+
+
+Example 2:
+
+Input: -123
+Output: -321
+
+
+Example 3:
+
+Input: 120
+Output: 21
+
+
+Note:
+Assume we are dealing with an environment which could only hold integers within the 32-bit signed integer range. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
+
+```
+
+import java.util.Stack;
+
+public class P7 {
+    public int reverse(int x) {
+        boolean isNegative = false;
+        if (x < 0) {
+            isNegative = true;
+            x *= -1;
+        }
+
+        //检测是否溢出
+        //实际把rst设为long，再判断是否大于Integer.MAX_VALUE和小于Integer.MIN_VALUE就好
+        Stack<Integer> stack = new Stack<Integer>();
+        int rst = 0;
+        while (x != 0) {
+            rst = rst * 10 + x % 10;
+            if (rst != 0) {
+                stack.push(x % 10);
+            }
+            x /= 10;
+        }
+
+        int t = rst;
+        while (t != 0) {
+            if (t % 10 != stack.pop()) {
+                return 0;
+            }
+
+            t /= 10;
+        }
+
+        if (isNegative) {
+            rst *= -1;
+        }
+
+        return rst;
+    }
+
+    public static void main(String[] args) {
+        P7 p = new P7();
+        System.out.println(p.reverse(-100));
+        System.out.println(p.reverse(1000000004));
+    }
+}
+```
+
+
+
 ## <a name="8">8.String to Integer (atoi)</a>
+Implement atoi to convert a string to an integer.
+
+Hint: Carefully consider all possible input cases. If you want a challenge, please do not see below and ask yourself what are the possible input cases.
+
+Notes: It is intended for this problem to be specified vaguely (ie, no given input specs). You are responsible to gather all the input requirements up front.
+
+Update (2015-02-10):
+The signature of the C++ function had been updated. If you still see your function signature accepts a const char * argument, please click the reload button  to reset your code definition.
+
+spoilers alert... click to show requirements for atoi.
+
+Requirements for atoi:
+The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.
+
+The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.
+
+If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.
+
+If no valid conversion could be performed, a zero value is returned. If the correct value is out of the range of representable values, INT_MAX (2147483647) or INT_MIN (-2147483648) is returned.
+
+
+```
+
+public class P8 {
+    public int myAtoi(String str) {
+        // 空字符串
+        if (str.length() == 0) {
+            return 0;
+        }
+
+        int sign = 1, pos = 0, len = str.length();
+        // 去除行首空格
+        for (pos = 0; pos < len; pos++) {
+            if (str.charAt(pos) != ' ') {
+                break;
+            }
+        }
+
+        // 判断正负号，可能没有+号
+        if (str.charAt(pos) == '-') {
+            sign = -1;
+            pos++;
+        } else if (str.charAt(pos) == '+') {
+            pos++;
+        }
+
+        // 转换
+        int rst = 0;
+        for (; pos < len; pos++) {
+            int digit = str.charAt(pos) - '0';
+            // 是否是数字
+            if (digit >= 0 && digit <= 9) {
+                // 有溢出的话，除以10和之前的不一样
+                int temp = rst * 10 + digit;
+                if (temp / 10 != rst) {
+                    return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+                } else {
+                    rst = temp;
+                }
+            } else {
+                break;
+            }
+        }
+
+        return rst * sign;
+    }
+
+    public static void main(String[] args) {
+        P8 p = new P8();
+        System.out.println(p.myAtoi("+12344123123123123123123123"));
+    }
+}
+```
+
+
 ## <a name="9">9.Palindrome Number</a>
+
+Determine whether an integer is a palindrome. Do this without extra space.
+
+click to show spoilers.
+
+Some hints:
+Could negative integers be palindromes? (ie, -1)
+
+If you are thinking of converting the integer to string, note the restriction of using extra space.
+
+You could also try reversing an integer. However, if you have solved the problem "Reverse Integer", you know that the reversed integer might overflow. How would you handle such case?
+
+There is a more generic way of solving this problem.
+
+```
+public class P9 {
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+
+        // 这里额外用了空间，不好
+        String s = Integer.toString(x);
+        int l = 0, r = s.length() - 1;
+
+        while (l < r) {
+            if (s.charAt(l) == s.charAt(r)) {
+                l++;
+                r--;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        P9 p = new P9();
+        System.out.println(p.isPalindrome(-2147447412));
+    }
+}
+```
+
+```
+
+public class P9_new {
+    public boolean isPalindrome(int x) {
+        if (x < 0 || (x != 0 && x % 10 == 0)) {
+            return false;
+        }
+
+        int rev = 0;
+        // 这里只转一半，就不会有全转后溢出的问题
+        while (x > rev) {
+            rev = rev * 10 + x % 10;
+            x /= 10;
+        }
+
+        // 这里需要两个判断，因为x可能是奇数位数，这样rev会多一位
+        return rev == x || rev / 10 == x;
+    }
+
+    public static void main(String[] args) {
+        P9 p = new P9();
+        System.out.println(p.isPalindrome(14744741));
+    }
+}
+```
+
+
+
 ## <a name="10">10.Regular Expression Matching</a>
+Implement regular expression matching with support for '.' and '*'.
+
+'.' Matches any single character.
+'*' Matches zero or more of the preceding element. 匹配0个或多个前面的元素
+
+The matching should cover the entire input string (not partial).
+
+The function prototype should be:
+bool isMatch(const char *s, const char *p)
+
+Some examples:
+isMatch("aa","a") → false
+isMatch("aa","aa") → true
+isMatch("aaa","aa") → false
+isMatch("aa", "a*") → true
+isMatch("aa", ".*") → true
+isMatch("ab", ".*") → true
+isMatch("aab", "c*a*b") → true
+
+
+搜索，时间复杂度O(2^n)
+```
+
+public class P10 {
+    public boolean dfs(String s, int sPos, int sLen, String p, int pPos, int pLen) {
+        if (pPos >= pLen) {
+            // p已经空了，如果sPos也是空，则匹配，否则不匹配
+            if (sPos >= sLen) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // 处理*的情况
+        if (pPos < pLen - 1 && p.charAt(pPos + 1) == '*') {
+            // 如果s和p相应字符一样，或者p为.，则s后移一位(*匹配一位s)，或p后移两位(*不匹配)
+            if (sPos < sLen && (s.charAt(sPos) == p.charAt(pPos) || p.charAt(pPos) == '.')) {
+                return dfs(s, sPos + 1, sLen, p, pPos, pLen) || dfs(s, sPos, sLen, p, pPos + 2, pLen);
+            } else {
+                return dfs(s, sPos, sLen, p, pPos + 2, pLen);
+            }
+        } else if (sPos < sLen && (s.charAt(sPos) == p.charAt(pPos) || p.charAt(pPos) == '.')) {
+            // 处理字符相等，或p为.的情况，各自后移一位。注意判断sPos < sLen，否则会越界，且a和a.会误判为true
+            return dfs(s, sPos + 1, sLen, p, pPos + 1, pLen);
+        }
+
+        return false;
+    }
+
+    public boolean isMatch(String s, String p) {
+        return dfs(s, 0, s.length(), p, 0, p.length());
+    }
+
+    public static void main(String[] args) {
+        P10 p = new P10();
+        System.out.println(p.isMatch("aab", ".*"));
+    }
+}
+```
+
+动态规划, 时间复杂度O(n+m)
+
+```
+
+public class P10_new {
+    /*
+     * 1, If p.charAt(j) == s.charAt(i) :  dp[i][j] = dp[i-1][j-1];
+     * 2, If p.charAt(j) == '.' : dp[i][j] = dp[i-1][j-1];
+     * 3, If p.charAt(j) == '*':
+     *   here are two sub conditions:
+     *   1   if p.charAt(j-1) != s.charAt(i) : dp[i][j] = dp[i][j-2]  //in this case, a* only counts as empty
+     *   2   if p.charAt(j-1) == s.charAt(i) or p.charAt(i-1) == '.':
+     *                dp[i][j] = dp[i-1][j]   // in this case, a* counts as single or multiple a
+     *             or dp[i][j] = dp[i][j-2]   // in this case, a* counts as empty
+     */
+
+    public boolean isMatch(String s, String p) {
+        boolean[][] f = new boolean[s.length() + 1][p.length() + 1];
+        f[0][0] = true;
+
+        for (int i = 1, len = p.length(); i <= len; i++) {
+            if (p.charAt(i - 1) == '*' && f[0][i - 2]) {
+                f[0][i] = true;
+            }
+        }
+
+        for (int i = 1, sLen = s.length(); i <= sLen; i++) {
+            for (int j = 1, pLen = p.length(); j <= pLen; j++) {
+                if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.') {
+                    f[i][j] = f[i - 1][j - 1];
+                } else if (p.charAt(j - 1) == '*') {
+                    if (s.charAt(i - 1) == p.charAt(j - 2) || p.charAt(j - 2) == '.') {
+                        f[i][j] = f[i - 1][j] || f[i][j - 2];
+                    } else {
+                        f[i][j] = f[i][j - 2];
+                    }
+                }
+            }
+        }
+
+        return f[s.length()][p.length()];
+    }
+
+    public static void main(String[] args) {
+        P10_new p = new P10_new();
+        System.out.println(p.isMatch("aa", "a*"));
+    }
+}
+
+
+```
+
 
