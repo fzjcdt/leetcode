@@ -922,15 +922,601 @@ public class P10_new {
 ```
 
 ## <a name="11">11.Container With Most Water</a>
+Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+Note: You may not slant the container and n is at least 2.
+
+```
+public class P11 {
+    /*
+     * 双指针
+     * 装水多少取决于较小的那个，所以每次移动较小的
+     */
+
+    public int maxArea(int[] height) {
+        int maxWater = 0;
+        int left = 0, right = height.length - 1;
+
+        while (left < right) {
+            maxWater = Math.max(maxWater, (right - left) * Math.min(height[left], height[right]));
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxWater;
+    }
+
+    public static void main(String[] args) {
+        P11 p = new P11();
+        int[] h = {1, 2, 3};
+        System.out.println(p.maxArea(h));
+    }
+}
+```
+
+
 ## <a name="12">12.Integer to Roman</a>
+Given an integer, convert it to a roman numeral.
+
+Input is guaranteed to be within the range from 1 to 3999.
+
+```
+
+public class P12 {
+    /*
+     * 数字和字符对应就好
+     */
+    public String intToRoman(int num) {
+        int[] value = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] symbol = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+        StringBuilder sb = new StringBuilder();
+        int pos = 0;
+        while (num > 0) {
+            while (num >= value[pos]) {
+                num -= value[pos];
+                sb.append(symbol[pos]);
+            }
+            pos++;
+        }
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        P12 p = new P12();
+        System.out.println(p.intToRoman(7));
+    }
+}
+```
+
+
+
 ## <a name="13">13.Roman to Integer</a>
+Given a roman numeral, convert it to an integer.
+
+Input is guaranteed to be within the range from 1 to 3999.
+```
+import java.util.HashMap;
+import java.util.Map;
+
+public class P13 {
+    /*
+     * 同样对应就好
+     * 左边的小于右边则减，比如IV，第一个减1，第二个加5
+     */
+
+    public int romanToInt(String s) {
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        map.put('M', 1000);
+        map.put('D', 500);
+        map.put('C', 100);
+        map.put('L', 50);
+        map.put('X', 10);
+        map.put('V', 5);
+        map.put('I', 1);
+
+        int totalValue = 0;
+        for (int i = 0, len = s.length(); i < len; i++) {
+            if (i < len - 1 && map.get(s.charAt(i)) < map.get(s.charAt(i + 1))) {
+                totalValue -= map.get(s.charAt(i));
+            } else {
+                totalValue += map.get(s.charAt(i));
+            }
+        }
+
+        return totalValue;
+    }
+
+    public static void main(String[] args) {
+        P13 p = new P13();
+        System.out.println(p.romanToInt("VII"));
+    }
+}
+
+```
+
 ## <a name="14">14.Longest Common Prefix</a>
+Write a function to find the longest common prefix string amongst an array of strings.
+
+```
+public class P14 {
+    /*
+     * 逐一比较, 确认一下边界即可
+     */
+
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) {
+            return "";
+        }
+
+        int pos = 0, minLen = Integer.MAX_VALUE;
+        char temp;
+
+        for (int i = 0, size = strs.length; i < size; i++) {
+            int len = strs[i].length();
+            if (len == 0) {
+                return "";
+            } else {
+                minLen = Math.min(minLen, len);
+            }
+        }
+
+        boolean isSame = true;
+        for (int i = 0; i < minLen; i++) {
+            temp = strs[0].charAt(i);
+            for (int j = 1, size = strs.length; j < size; j++) {
+                if (temp != strs[j].charAt(i)) {
+                    isSame = false;
+                    break;
+                }
+            }
+
+            if (isSame) {
+                pos++;
+            } else {
+                break;
+            }
+        }
+
+        return strs[0].substring(0, pos);
+    }
+
+    public static void main(String[] args) {
+        P14 p = new P14();
+        String[] s = {"aa", "a"};
+        System.out.println(p.longestCommonPrefix(s));
+    }
+}
+
+```
 ## <a name="15">15.3Sum</a>
+Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+
+Note: The solution set must not contain duplicate triplets.
+
+For example, given array S = [-1, 0, 1, 2, -1, -4],
+
+A solution set is:
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+
+```
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class P15 {
+    /*
+     * a + b + c = 0 -> a + b = -c
+     * 本题主要是对重复数据的处理
+     */
+
+    public List<List<Integer>> threeSum(int[] nums) {
+        // 先排序
+        Arrays.sort(nums);
+        List<List<Integer>> rst = new ArrayList<List<Integer>>();
+        int target, left, right;
+
+        for (int i = 0, len = nums.length; i < len - 2; i++) {
+            // 和上一个数一样，跳过
+            if (i != 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            // 从当前位置之后到最后找
+            target = -1 * nums[i];
+            left = i + 1;
+            right = len - 1;
+            while (left < right) {
+                if (nums[left] + nums[right] < target) {
+                    left++;
+                } else if (nums[left] + nums[right] > target) {
+                    right--;
+                } else {
+                    // 找到后添加进去
+                    List<Integer> temp = new ArrayList<Integer>();
+                    temp.add(nums[i]);
+                    temp.add(nums[left]);
+                    temp.add(nums[right]);
+                    rst.add(temp);
+                    left++;
+                    right--;
+
+                    // 和前一个数一样跳过，否则比如-3, 1, 1, 2, 2， 就会有两个-3, 1, 2
+                    while (left < len && nums[left] == nums[left - 1]) {
+                        left++;
+                    }
+                    while (right > 0 && nums[right] == nums[right + 1]) {
+                        right--;
+                    }
+                }
+            }
+        }
+
+        return rst;
+    }
+
+    public static void main(String[] args) {
+        P15 p = new P15();
+        int[] n = {-1, -1, 0, 1, 2};
+        List<List<Integer>> l = p.threeSum(n);
+        for (List<Integer> t : l) {
+            System.out.println(t);
+        }
+    }
+}
+
+```
+
+
 ## <a name="16">16.3Sum Closest</a>
+Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+
+    For example, given array S = {-1 2 1 -4}, and target = 1.
+
+    The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+
+```
+import java.util.Arrays;
+
+public class P16 {
+    /*
+     * O(n^2)
+     * a + b + c 最接近 target
+     * a + b 最接近 target - c
+     * 双指针，记录minDis
+     * 和比target - c小，一定是left++，因为right--会更小，一定不是结果
+     * 和比target - c大同理
+     */
+
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int left, right, rst = 0, minDis = Integer.MAX_VALUE, newTarget;
+
+        for (int i = 0, len = nums.length; i < len - 2; i++) {
+            newTarget = -1 * nums[i] + target;
+            left = i + 1;
+            right = len - 1;
+
+            while (left < right) {
+                if (nums[left] + nums[right] < newTarget) {
+                    if (newTarget - nums[left] - nums[right] < minDis) {
+                        minDis = newTarget - nums[left] - nums[right];
+                        rst = nums[left] + nums[right] + nums[i];
+                    }
+                    left++;
+                } else if (nums[left] + nums[right] > newTarget) {
+                    if (nums[left] + nums[right] - newTarget < minDis) {
+                        minDis = nums[left] + nums[right] - newTarget;
+                        rst = nums[left] + nums[right] + nums[i];
+                    }
+                    right--;
+                } else {
+                    return target;
+                }
+            }
+        }
+
+        return rst;
+    }
+
+    public static void main(String[] args) {
+        P16 p = new P16();
+        int[] nums = {-1, 2, 1, -4};
+        System.out.println(p.threeSumClosest(nums, 1));
+    }
+}
+
+```
+
+
 ## <a name="17">17.Letter Combinations of a Phone Number</a>
+
+Given a digit string, return all possible letter combinations that the number could represent.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below.
+
+
+Input:Digit string "23"
+Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+Note:
+Although the above answer is in lexicographical order, your answer could be in any order you want.
+
+```
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class P17 {
+    /*
+     * 搜索，或者用栈
+     * 注意digits为""的情况，rst不能直接加str.toString，这样会有一个""元素
+     */
+    public void dfs(String digits, int pos, int len, Map<Character, String> map, List<String> rst, StringBuilder str) {
+        if (pos == len) {
+            if (len != 0) {
+                rst.add(str.toString());
+            }
+            return;
+        } else {
+            String s = map.get(digits.charAt(pos));
+            for (int i = 0, l = s.length(); i < l; i++) {
+                str.append(s.charAt(i));
+                dfs(digits, pos + 1, len, map, rst, str);
+                str.deleteCharAt(pos);
+            }
+        }
+    }
+
+    public List<String> letterCombinations(String digits) {
+        Map<Character, String> map = new HashMap<Character, String>();
+        map.put('1', "1");
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+        map.put('0', "0");
+
+        StringBuilder str = new StringBuilder();
+        List<String> rst = new ArrayList<String>();
+        dfs(digits, 0, digits.length(), map, rst, str);
+
+        return rst;
+    }
+
+    public static void main(String[] args) {
+        P17 p = new P17();
+        List<String> l = p.letterCombinations("");
+        for (String s : l) {
+            System.out.print(s + " ");
+        }
+    }
+}
+
+```
+
+
 ## <a name="18">18.4Sum</a>
+Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
+
+Note: The solution set must not contain duplicate quadruplets.
+
+For example, given array S = [1, 0, -1, 0, -2, 2], and target = 0.
+
+A solution set is:
+[
+  [-1,  0, 0, 1],
+  [-2, -1, 1, 2],
+  [-2,  0, 0, 2]
+]
+
+
+```
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class P18 {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        return kSum(nums, target, 4);
+    }
+
+    // 推广到了k个数之和为target的情况
+    // 不断递归，边界是k = 2
+    public List<List<Integer>> kSum(int[] nums, int target, int k) {
+        Arrays.sort(nums);
+        List<List<Integer>> rst = new ArrayList<List<Integer>>();
+        // 注意nums为空的情况
+        if (nums.length == 0) {
+            return rst;
+        } else {
+            kSumImp(nums, 0, target, k, rst, new ArrayList<Integer>());
+            return rst;
+        }
+    }
+
+    public void kSumImp(int[] nums, int startPos, int target, int k,
+                        List<List<Integer>> rst, List<Integer> pastValue) {
+        // 后面的数太大，或者数不够多
+        if (nums[startPos] * k > target || startPos + k > nums.length) {
+            return;
+        }
+
+        if (k == 2) {
+            int left = startPos;
+            int right = nums.length - 1;
+            while (left < right) {
+                if (nums[left] + nums[right] < target) {
+                    left++;
+                } else if (nums[left] + nums[right] > target) {
+                    right--;
+                } else {
+                    List<Integer> tempList = new ArrayList<Integer>();
+                    // 加上之前的数
+                    tempList.addAll(pastValue);
+                    tempList.add(nums[left]);
+                    tempList.add(nums[right]);
+                    rst.add(tempList);
+                    left++;
+                    right--;
+                    // 去重
+                    while (left < right && nums[left] == nums[left - 1]) {
+                        left++;
+                    }
+                    while (right > left && nums[right] == nums[right + 1]) {
+                        right--;
+                    }
+                }
+            }
+        } else {
+            for (int i = startPos, len = nums.length; i < len - k + 1; i++) {
+                // 去重，有重复数字，最左边的能用最多的相同的数字，之后的就是多余了的
+                if (i != startPos && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+
+                int newTarget = target - nums[i];
+                pastValue.add(nums[i]);
+                kSumImp(nums, i + 1, newTarget, k - 1, rst, pastValue);
+                pastValue.remove(pastValue.size() - 1);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        P18 p = new P18();
+        int[] nums = {1, 0, -1, 0, -2, 2};
+        List<List<Integer>> list = p.fourSum(nums, 0);
+        for (List<Integer> l : list) {
+            for (int t : l) {
+                System.out.print(t + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
 ## <a name="19">19.Remove Nth Node From End of List</a>
+Given a linked list, remove the nth node from the end of list and return its head.
+
+For example,
+
+   Given linked list: 1->2->3->4->5, and n = 2.
+
+   After removing the second node from the end, the linked list becomes 1->2->3->5.
+Note:
+Given n will always be valid.
+Try to do this in one pass.
+实际上双指针就相当于是two pass了。。
+
+```
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) {
+        val = x;
+    }
+}
+
+public class P19 {
+    /*
+     * 前后指针，前指针到null，后指针为要删除的元素
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode left = head;
+        ListNode right = head;
+        for (int i = 0; i < n; i++) {
+            right = right.next;
+            // 题目已经确认了n有效，否则这里需要判断一下right是否为null
+        }
+
+        // 删除第一个
+        if (right == null) {
+            return head.next;
+        }
+
+        while (right.next != null) {
+            left = left.next;
+            right = right.next;
+        }
+
+        left.next = left.next.next;
+
+        return head;
+    }
+
+    public static void main(String[] args) {
+        P19 p = new P19();
+        ListNode head = new ListNode(1);
+        ListNode node2 = new ListNode(2);
+        ListNode node3 = new ListNode(3);
+        ListNode node4 = new ListNode(4);
+        ListNode node5 = new ListNode(5);
+        head.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+
+        p.removeNthFromEnd(head, 2);
+        while (head != null) {
+            System.out.println(head.val);
+            head = head.next;
+        }
+    }
+}
+
+```
+
 ## <a name="20">20.Valid Parentheses</a>
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+
+```
+import java.util.Stack;
+
+public class P20 {
+    /*
+     * 栈的简单应用，括号匹配
+     */
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        for (int i = 0, len = s.length(); i < len; i++) {
+            if (s.charAt(i) == '[' || s.charAt(i) == '(' || s.charAt(i) == '{') {
+                stack.push(s.charAt(i));
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                } else if ((s.charAt(i) == ']' && stack.pop() != '[')
+                        || (s.charAt(i) == ')' && stack.pop() != '(')
+                        || (s.charAt(i) == '}' && stack.pop() != '{')) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        P20 p = new P20();
+        System.out.println(p.isValid("[]()"));
+    }
+}
+```
+
+
 ## <a name="21">21.Merge Two Sorted Lists</a>
 ## <a name="22">22.Generate Parentheses</a>
 ## <a name="23">23.Merge k Sorted Lists</a>
