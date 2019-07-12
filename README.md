@@ -19,7 +19,7 @@
 
 
 
-## <a name="1">Two Sum</a>
+## <a name="1">1.Two Sum</a>
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -117,6 +117,15 @@ public class P_1_new {
 }
 ```
 
-## <a name="2">Add Two Numbers</a>
+## <a name="2">2.Add Two Numbers</a>
 
+
+## <a name="3">3.Longest Substring Without Repeating Characters</a>
+## <a name="4">4.Median of Two Sorted Arrays</a>
+## <a name="5">5.Longest Palindromic Substring</a>
+## <a name="6">6.ZigZag Conversion</a>
+## <a name="7">7.Reverse Integer</a>
+## <a name="8">8.String to Integer (atoi)</a>
+## <a name="9">9.Palindrome Number</a>
+## <a name="10">10.Regular Expression Matching</a>
 
