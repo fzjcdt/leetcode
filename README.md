@@ -62,5 +62,25 @@
 | 58    | [Length of Last Word    	](41-60.md)  | 模拟 |
 | 59    | [Spiral Matrix II    	](41-60.md)  | 模拟 |
 | 60    | [Permutation Sequence    	](41-60.md)  | 模拟 |
+| 61    | [Rotate List](61-80.md)  | 链表 |
+| 62    | [Unique Paths ](61-80.md)  | 动态规划 |
+| 63    | [Unique Paths II](61-80.md)  | 动态规划 |
+| 64    | [Minimum Path Sum](61-80.md)  | 动态规划 |
+| 65    | [Valid Number](61-80.md)  | 模拟 |
+| 66    | [Plus One](61-80.md)  | 模拟 |
+| 67    | [Add Binary ](61-80.md)  | 模拟 |
+| 68    | [Text Justification ](61-80.md)  | 模拟 |
+| 69    | [Sqrt(x)](61-80.md)  | 二分 |
+| 70    | [Climbing Stairs](61-80.md)  | 动态规划 |
+| 71    | [Simplify Path](61-80.md)  | 栈 |
+| 72    | [Edit Distance](61-80.md)  | 动态规划 |
+| 73    | [Set Matrix Zeroes ](61-80.md)  | 模拟 |
+| 74    | [Search a 2D Matrix](61-80.md)  | 模拟 |
+| 75    | [Sort Colors](61-80.md)  | 多指针 |
+| 76    | [Minimum Window Substring ](61-80.md)  | 字符串 |
+| 77    | [Combinations](61-80.md)  | 搜索 |
+| 78    | [Subsets](61-80.md)  | 搜索 |
+| 79    | [Word Search](61-80.md)  | 搜索 |
+| 80    | [Remove Duplicates from Sorted Array II  ](61-80.md)  | 双指针 |
 
 
