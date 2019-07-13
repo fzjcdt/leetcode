@@ -83,24 +83,24 @@
 | 79    | [Word Search](61-80.md)  | 搜索 |
 | 80    | [Remove Duplicates from Sorted Array II  ](61-80.md)  | 双指针 |
 | 81    | [Search in Rotated Sorted Array II    	](81-100.md)  | 二分 |
-| 82    | Remove Duplicates from Sorted List II    	[](81-100.md)  | 模拟 |
-| 83    | [Remove Duplicates from Sorted List    	](81-100.md)  | 模拟 |
-| 84    | [Largest Rectangle in Histogram    	](81-100.md)  | 模拟 |
-| 85    | [Maximal Rectangle    	](81-100.md)  | 模拟 |
-| 86    | [Partition List    	](81-100.md)  | 模拟 |
-| 87    | [Scramble String    	](81-100.md)  | 模拟 |
+| 82    | Remove Duplicates from Sorted List II    	[](81-100.md)  | 链表 |
+| 83    | [Remove Duplicates from Sorted List    	](81-100.md)  | 链表 |
+| 84    | [Largest Rectangle in Histogram    	](81-100.md)  | 动态规划 |
+| 85    | [Maximal Rectangle    	](81-100.md)  | 动态规划 |
+| 86    | [Partition List    	](81-100.md)  | 链表 |
+| 87    | [Scramble String    	](81-100.md)  | 搜索，记忆化搜索，动态规划 |
 | 88    | [Merge Sorted Array    	](81-100.md)  | 模拟 |
 | 89    | [Gray Code    	](81-100.md)  | 模拟 |
-| 90    | [Subsets II    	](81-100.md)  | 模拟 |
-| 91    | [Decode Ways    	](81-100.md)  | 模拟 |
-| 92    | [Reverse Linked List II    	](81-100.md)  | 模拟 |
+| 90    | [Subsets II    	](81-100.md)  | 搜索 |
+| 91    | [Decode Ways    	](81-100.md)  | 搜索，动态规划 |
+| 92    | [Reverse Linked List II    	](81-100.md)  | 链表 |
 | 93    | [Restore IP Addresses    	](81-100.md)  | 模拟 |
-| 94    | [Binary Tree Inorder Traversal    	](81-100.md)  | 模拟 |
-| 95    | [Unique Binary Search Trees II    	](81-100.md)  | 模拟 |
-| 96    | [Unique Binary Search Trees    	](81-100.md)  | 模拟 |
-| 97    | [Interleaving String    	](81-100.md)  | 模拟 |
-| 98    | [Validate Binary Search Tree    	](81-100.md)  | 模拟 |
-| 99    | [Recover Binary Search Tree    	](81-100.md)  | 模拟 |
-| 100    | [Same Tree    	](81-100.md)  | 模拟 |
+| 94    | [Binary Tree Inorder Traversal    	](81-100.md)  | 中序遍历 |
+| 95    | [Unique Binary Search Trees II    	](81-100.md)  | 二叉搜索树，递归 |
+| 96    | [Unique Binary Search Trees    	](81-100.md)  | 二叉搜索树，动态规划 |
+| 97    | [Interleaving String    	](81-100.md)  | 搜索，动态规划 |
+| 98    | [Validate Binary Search Tree    	](81-100.md)  | 二叉搜索树 |
+| 99    | [Recover Binary Search Tree    	](81-100.md)  | 二叉搜索树 |
+| 100    | [Same Tree    	](81-100.md)  | 递归 |
 
 
