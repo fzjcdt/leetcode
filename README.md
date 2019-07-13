@@ -83,7 +83,7 @@
 | 79    | [Word Search](61-80.md)  | 搜索 |
 | 80    | [Remove Duplicates from Sorted Array II  ](61-80.md)  | 双指针 |
 | 81    | [Search in Rotated Sorted Array II    	](81-100.md)  | 二分 |
-| 82    | Remove Duplicates from Sorted List II    	[](81-100.md)  | 链表 |
+| 82    | [Remove Duplicates from Sorted List II    	](81-100.md)  | 链表 |
 | 83    | [Remove Duplicates from Sorted List    	](81-100.md)  | 链表 |
 | 84    | [Largest Rectangle in Histogram    	](81-100.md)  | 动态规划 |
 | 85    | [Maximal Rectangle    	](81-100.md)  | 动态规划 |
