@@ -1,0 +1,78 @@
+## 101. Symmetric Tree
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+ 
+
+But the following [1,2,2,null,3,null,3] is not:
+
+    1
+   / \
+  2   2
+   \   \
+   3    3
+
+```
+// Definition for a binary tree node.
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int x) {
+        val = x;
+    }
+}
+
+public class P101 {
+    /*
+    一棵树是对称的，它的左右子树是对称的
+    两颗树是对称的，则两棵树的root的值一样，且A的右子树和B的左子树对称，A的左子树和B的右子树对称.
+     */
+    public static void main(String[] args) {
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(2);
+        TreeNode node4 = new TreeNode(3);
+        TreeNode node5 = new TreeNode(3);
+        TreeNode node6 = new TreeNode(4);
+        TreeNode node7 = new TreeNode(4);
+        node1.left = node2;
+        node1.right = node3;
+        node2.left = node6;
+        node3.right = node7;
+        node2.right = node4;
+        node3.left = node5;
+
+        System.out.println(new P101().isSymmetric(node1));
+    }
+
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+
+        return isMirror(root.left, root.right);
+    }
+
+    private boolean isMirror(TreeNode node1, TreeNode node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+
+        if (node1 == null || node2 == null) {
+            return false;
+        }
+
+        return node1.val == node2.val && isMirror(node1.left, node2.right) && isMirror(node1.right, node2.left);
+    }
+}
+
+```
