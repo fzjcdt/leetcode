@@ -78,3 +78,43 @@ public class P115 {
 }
 
 ```
+
+### 120. Triangle
+Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+
+For example, given the following triangle
+```
+[
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+```
+The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
+
+Note:
+
+Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
+```
+import java.util.List;
+
+public class P120 {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        List<Integer> bottomLine = triangle.get(triangle.size() - 1);
+        int[] dp = new int[bottomLine.size()];
+        for (int i = 0; i < bottomLine.size(); i++) {
+            dp[i] = bottomLine.get(i);
+        }
+
+        for (int i = triangle.size() - 1; i >= 1; i--) {
+            for (int j = 0; j < i; j++) {
+                dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i - 1).get(j);
+            }
+        }
+
+        return dp[0];
+    }
+}
+
+```
